@@ -1,6 +1,7 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -O2 -Iinclude -Wall
-LDFLAGS = -lmysqlclient -pthread
+LDFLAGS_SERVER = -lmysqlclient -pthread
+LDFLAGS_LOADGEN = -lcurl -pthread
 
 SRCDIR = src
 BINDIR = bin
@@ -11,10 +12,10 @@ dirs:
 	mkdir -p $(BINDIR)
 
 $(BINDIR)/kv_server: $(SRCDIR)/cache.cpp $(SRCDIR)/db.cpp $(SRCDIR)/threadpool.cpp $(SRCDIR)/server.cpp
-	$(CXX) $(CXXFLAGS) -o $@ $(SRCDIR)/cache.cpp $(SRCDIR)/db.cpp $(SRCDIR)/threadpool.cpp $(SRCDIR)/server.cpp $(LDFLAGS)
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS_SERVER)
 
-$(BINDIR)/loadgen: $(SRCDIR)/loadgen.cpp
-	$(CXX) $(CXXFLAGS) -o $@ $(SRCDIR)/loadgen.cpp -pthread
+$(BINDIR)/loadgen: $(SRCDIR)/load_generator.cpp
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS_LOADGEN)
 
 clean:
-	rm -rf bin
+	rm -rf $(BINDIR)

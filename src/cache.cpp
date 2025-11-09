@@ -28,7 +28,7 @@ optional<string> LRUCache::get(const string &key) {
     lock_guard<mutex> lock(m);
     auto it = mp.find(key);
     if (it == mp.end()) {
-        cout << "[CACHE] MISS for key " << key << endl;
+        cout << "CACHE MISS for key " << key << endl;
         return {};
     }
     auto nodeIt = it->second;
@@ -36,7 +36,7 @@ optional<string> LRUCache::get(const string &key) {
     items.erase(nodeIt);
     items.emplace_front(kv);
     mp[key] = items.begin();
-    cout << "[CACHE] HIT for key " << key << endl;
+    cout << "CACHE HIT for key " << key << endl;
 
     return items.begin()->second;
 }
@@ -47,7 +47,7 @@ void LRUCache::erase(const string &key) {
     if (it == mp.end()) return;
     items.erase(it->second);
     mp.erase(it);
-    cout << "[CACHE] Deleted key " << key << endl;
+    cout << "CACHE Deleted key " << key << endl;
 
 }
 

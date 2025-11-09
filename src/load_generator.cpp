@@ -9,7 +9,7 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <unistd.h>
-
+#include <sstream>
 using namespace std;
 
 atomic<long> total_requests(0);
