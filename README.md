@@ -23,7 +23,7 @@ This project implements:
 - mysql-server
 - libmysqlclient-dev
 
-Install on Ubuntu:
+Important Commands:
 ```bash
 sudo apt update
 sudo apt install g++ make libmysqlclient-dev mysql-server
